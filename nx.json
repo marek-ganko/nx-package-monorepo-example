@@ -1,6 +1,8 @@
 {
-  "extends": "nx/presets/npm.json",
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "workspaceLayout": {
+    "libsDir": "libs",
+    "appsDir": "apps"
+  },
   "tasksRunnerOptions": {
     "default": {
       "runner": "nx/tasks-runners/default",
@@ -12,6 +14,25 @@
           "e2e"
         ]
       }
+    }
+  },
+  "extends": "nx/presets/npm.json",
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "targetDefaults": {
+    "test": {
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/jest.preset.js"
+      ]
+    },
+    "lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore",
+        "{workspaceRoot}/eslint.config.js"
+      ]
     }
   }
 }
